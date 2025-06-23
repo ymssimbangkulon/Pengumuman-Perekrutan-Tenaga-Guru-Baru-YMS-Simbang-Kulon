@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PENGUMUMAN PEREKRUTAN TENAGA PENDIDIK / GURU YMS SIMBANG KULON</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f7f7f7; text-align: center; padding: 20px; }
+        .container { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        img.logo { width: 120px; margin-bottom: 20px; }
+        input[type="text"] { padding: 10px; width: 80%; border-radius: 5px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; margin-top: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .result { margin-top: 20px; font-size: 1.1em; }
+        .lulus { color: green; font-weight: bold; }
+        .tidak-lulus { color: red; font-weight: bold; }
+        .info { text-align: left; margin-top: 10px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="yms logo.png" alt="Logo YMS Simbang Kulon" class="logo">
+    <h2>PENGUMUMAN PEREKRUTAN TENAGA PENDIDIK / GURU YMS SIMBANG KULON</h2>
+    <p><strong>Assalamu'alaikum Wr Wb</strong></p>
+    <p>Terima kasih atas partisipasi Saudara / Saudari dalam proses perekrutan tenaga pendidik / guru baru di Yayasan Madrasah Salafiyah Simbang Kulon. Kami ucapkan selamat bagi yang lulus ke tahap selanjutnya, dan bagi yang belum lulus data lamaran saudara/saudari tetap akan tersimpan di database kami, dan jika suatu saat ada perekrutan lagi maka tidak perlu mengirim lamaran kembali.</p>
+    <p><strong>Wassalamu'alaikum Wr Wb</strong></p>
+    <p><em>ttd<br>Pengurus YMS Simbang Kulon</em></p>
+    <hr>
+    <h3>Cek Status Kelulusan Anda</h3>
+    <input type="text" id="nohp" placeholder="Masukkan No HP Terdaftar">
+    <button onclick="cekKelulusan()">Cek</button>
+    <div id="hasil" class="result"></div>
+</div>
+
+<script>
+const dataPelamarLengkap = {
+    "085705019925": {"nama":"Nurul Amalia","tglLahir":"03/07/2001","alamat":"Kertijayan Gg 13","pendidikan":"MA","institusi":"MAS Simbang Kulon","posisi":"Al Qur'an","status":"Lulus Tahap Selanjutnya"},
+    "0895414448997": {"nama":"Alma Rosalia Hilda","tglLahir":"29/01/1999","alamat":"Pakisputih, kdw","pendidikan":"Ponpes","institusi":"Al Fadlillah - Kudus","posisi":"Al Qur'an","status":"Lulus Tahap Selanjutnya"},
+    "081237680146": {"nama":"M. Furqon Zaenudin, S.Ag","tglLahir":"22/07/1993","alamat":"Pringlangu Gg 8","pendidikan":"S1 Ilmu Al-Qur'an & Tafsir","institusi":"UNSIQ Wonosobo","posisi":"B. Arab","status":"Belum Lulus"}
+    // Lengkapi seluruh entri pelamar di sini
+};
+
+function cekKelulusan() {
+    const nohp = document.getElementById("nohp").value.trim();
+    const hasil = document.getElementById("hasil");
+    const data = dataPelamarLengkap[nohp];
+
+    if (data) {
+        const statusClass = data.status === "Lulus Tahap Selanjutnya" ? "lulus" : "tidak-lulus";
+        let html = `<div class="info">
+            <p><strong>Nama:</strong> ${data.nama}</p>
+            <p><strong>Tanggal Lahir:</strong> ${data.tglLahir}</p>
+            <p><strong>Alamat:</strong> ${data.alamat}</p>
+            <p><strong>Pendidikan Terakhir:</strong> ${data.pendidikan}</p>
+            <p><strong>Asal Sekolah/Universitas:</strong> ${data.institusi}</p>
+            <p><strong>Melamar Sebagai:</strong> ${data.posisi}</p>
+            <p class="${statusClass}"><strong>Status:</strong> ${data.status}</p>`;
+        if (data.status === "Lulus Tahap Selanjutnya") {
+            html += `<p>Silakan hubungi admin YMS Simbang Kulon melalui WhatsApp: <a href='https://wa.me/6285134465945'>0851-3446-5945</a></p>`;
+        }
+        html += '</div>';
+        hasil.innerHTML = html;
+    } else {
+        hasil.innerHTML = `<p class="tidak-lulus">Nomor HP tidak ditemukan dalam database.</p>`;
+    }
+}
+</script>
+</body>
+</html>
